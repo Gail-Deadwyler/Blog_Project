@@ -8,7 +8,8 @@ app = Flask(__name__)
 all_posts = [
     {
         'title': 'Post 1',
-        'content': 'Content of Post1: Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+        'content': 'Content of Post1: Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+        'author': 'Gail Deadwyler'
     },
     {
         'title': 'Post 2',
