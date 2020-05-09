@@ -3,6 +3,19 @@ from flask import Flask, render_template
 # from datetime import datetime
 
 app = Flask(__name__)
+
+#Create dummy posts - mimics a database
+all_posts = [
+    {
+        'title': 'Post 1',
+        'content': 'Content of Post1: Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+    },
+    {
+        'title': 'Post 2',
+        'content': 'Content of Post2: Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+    },
+
+]
 #create an SQLlite test db
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 
@@ -28,7 +41,7 @@ def index():
 
 @app.route('/posts')
 def posts():
-    return render_template('posts.html')
+    return render_template('posts.html', posts=all_posts)
 
 @app.route('/onlyget', methods=['GET','POST'])
 def only_get():
