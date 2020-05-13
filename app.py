@@ -1,8 +1,30 @@
 from flask import Flask, render_template
-# from flask_sqlalchemy import SQLAlchemy
-# from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
+# creates our Flask app
 app = Flask(__name__)
+
+# Database setup
+# tells our Flask app where our db is stored
+# path to where our db is stored
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+
+# link our Flask app to the db
+db = SQLAlchemy(app)
+
+# create Model for our Blog Post - designing the db Model here
+class BlogPost(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    author = db.Column(db.String(20), nullable=False, default='N/A')
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    # prints out when we create a Blog Post
+    def __repr__(self):
+        return 'Blog post ' + str(self.id)
+
 
 #Create dummy posts - mimics a database
 all_posts = [
@@ -40,7 +62,7 @@ def index():
     return render_template('index.html')
     #return '<h1>Home Page</h1>'
 
-@app.route('/posts')
+@app.route('/posts', methods=['GET', 'POST'])
 def posts():
     return render_template('posts.html', posts=all_posts)
 
