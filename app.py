@@ -27,18 +27,18 @@ class BlogPost(db.Model):
 
 
 #Create dummy posts - mimics a database
-all_posts = [
-    {
-        'title': 'Post 1',
-        'content': 'Content of Post1: Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        'author': 'Gail Deadwyler'
-    },
-    {
-        'title': 'Post 2',
-        'content': 'Content of Post2: Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    },
+# all_posts = [
+#     {
+#         'title': 'Post 1',
+#         'content': 'Content of Post1: Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+#         'author': 'Gail Deadwyler'
+#     },
+#     {
+#         'title': 'Post 2',
+#         'content': 'Content of Post2: Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+#     },
 
-]
+# ]
 #create an SQLlite test db
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 
@@ -62,6 +62,7 @@ def index():
     return render_template('index.html')
     #return '<h1>Home Page</h1>'
 
+# route to retrieve form data and add to db
 @app.route('/posts', methods=['GET', 'POST'])
 def posts():
     # take form data and save to db
@@ -77,9 +78,12 @@ def posts():
         all_posts = BlogPost.query.order_by(BlogPost.date_posted).all()
         return render_template('posts.html', posts=all_posts)
 
-@app.route('/onlyget', methods=['GET','POST'])
-def only_get():
-    return "You only get this webpage"
+@app.route('/posts/delete/<int:id>')
+def delete(id):
+    post = BlogPost.query.get_or_404(id)
+    db.session.delete(post) # deletes data in current session
+    db.session.commit() # permanently saved to db
+    return redirect('/posts')
 
 
 # if this page is the main page, run it

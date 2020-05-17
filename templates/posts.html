@@ -12,10 +12,10 @@
     <form action="/posts" method="POST">
         Title: <input type="text" name="title" id="title">
         <br>
-        Post: <input type="text" name="content" id="content">
-        <br>
         Author: <input type="text" name="author" id="author">
         <br>
+        Post: <input type="text" name="content" id="content">
+        <br>       
         <input type="submit" value="Post">
     </form>
     <hr>
@@ -27,6 +27,8 @@
             <h2>By: N/A</h2>
         {% endif %}
         <p>{{ post.content }}</p>
+        <button type='button' onclick="document.location = '/posts/delete/{{ post.id }}' ">Delete</button>
+        <!-- <a href="/posts/delete/{{ post.id }}">Delete</a> -->
         
     {% endfor %}
     <!-- {% for post in posts %}
