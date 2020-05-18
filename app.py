@@ -78,12 +78,26 @@ def posts():
         all_posts = BlogPost.query.order_by(BlogPost.date_posted).all()
         return render_template('posts.html', posts=all_posts)
 
+# delete data from db based on unique post id
 @app.route('/posts/delete/<int:id>')
 def delete(id):
     post = BlogPost.query.get_or_404(id)
     db.session.delete(post) # deletes data in current session
     db.session.commit() # permanently saved to db
     return redirect('/posts')
+
+@app.route('/posts/edit/<int:id>', methods=['GET', 'POST'])
+def edit(id):
+    post = BlogPost.query.get_or_404(id)
+    if request.method == 'POST':
+        post.title = request.form['title']
+        post.author = request.form['author']
+        post.content = request.form['content']
+        db.session.commit()
+        return redirect('/posts')
+    else:
+        return render_template('edit.html', post=post)
+
 
 
 # if this page is the main page, run it
