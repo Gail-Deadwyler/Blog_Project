@@ -8,27 +8,35 @@
 {% block body %}
 <h1>Some Posts</h1>
     <hr>
-    <h2>Create New Blog Post</h2>
+    <h2>Create New Blog Post:</h2>
     <form action="/posts" method="POST">
-        Title: <input type="text" name="title" id="title">
+        <label for="title">Title:</label> 
+        <!-- <input type="text" name="title" id="title"> -->
+        <input class="form-control" type="text" name="title" id="title" placeholder="Enter Title" aria-label="Enter Title">
         <br>
-        Author: <input type="text" name="author" id="author">
+        <label for="author">Author:</label>  
+        <!-- <input type="text" name="author" id="author"> -->
+        <input class="form-control" type="text" name="author" id="author" placeholder="Enter Author" aria-label="Enter Author">
         <br>
-        Post: <input type="text" name="content" id="content">
+        <label for="content">Post:</label> 
+        <textarea class="form-control" name="content" id="content" rows="3" placeholder="Enter Content" aria-label="Enter Content"></textarea>
         <br>       
-        <input type="submit" value="Post">
+        <input class="btn btn-primary" type="submit" value="Post">
     </form>
     <hr>
     {% for post in posts %}
+        <br>
         <h2>{{ post.title }}</h2>
         {% if post.author %}
-            <h2>By: {{ post.author }}</h2>
+            <small>Written by {{ post.author }} on {{ post.date_posted }}</small>
         {% else %}
-            <h2>By: N/A</h2>
+            <small>Written by Unknown on {{ post.date_posted }}</small>
         {% endif %}
-        <p>{{ post.content }}</p>
-        <button type='button' onclick="document.location = '/posts/delete/{{ post.id }}' ">Delete</button>
-        <button type='button' onclick="document.location = '/posts/edit/{{ post.id }}' ">Edit</button>
+        <br>
+        <br>
+        <p style="white-space: pre-wrap;">{{ post.content }}</p>
+        <button class="btn btn-danger" type="button" onclick="document.location = '/posts/delete/{{ post.id }}' ">Delete</button>
+        <button class="btn btn-primary" type="button" onclick="document.location = '/posts/edit/{{ post.id }}' ">Edit</button>
         <hr>
         <!-- <a href="/posts/delete/{{ post.id }}">Delete</a> -->
         
