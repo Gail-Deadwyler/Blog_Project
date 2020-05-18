@@ -29,6 +29,7 @@
         <p>{{ post.content }}</p>
         <button type='button' onclick="document.location = '/posts/delete/{{ post.id }}' ">Delete</button>
         <button type='button' onclick="document.location = '/posts/edit/{{ post.id }}' ">Edit</button>
+        <hr>
         <!-- <a href="/posts/delete/{{ post.id }}">Delete</a> -->
         
     {% endfor %}

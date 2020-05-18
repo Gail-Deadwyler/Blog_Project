@@ -86,6 +86,7 @@ def delete(id):
     db.session.commit() # permanently saved to db
     return redirect('/posts')
 
+# allows user to edit posts based on unique post id
 @app.route('/posts/edit/<int:id>', methods=['GET', 'POST'])
 def edit(id):
     post = BlogPost.query.get_or_404(id)
