@@ -1,14 +1,24 @@
+import os
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 # creates our Flask app
 app = Flask(__name__)
-
 # Database setup
+
+ENV = 'prod'
+
 # tells our Flask app where our db is stored
 # path to where our db is stored
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+if ENV == 'dev':
+    app.debug = True
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///posts.db') 
+else:
+    app.debug = False
+    app.configapp.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://uxkxqhuemkxskl:575935b2d06e4dd4479479163c0aca91f0715d7983f9915a463fd36de7ae9a29@ec2-18-210-214-86.compute-1.amazonaws.com:5432/d6j3gfi4nhrsak'
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # link our Flask app to the db
 db = SQLAlchemy(app)
