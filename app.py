@@ -25,6 +25,7 @@ db = SQLAlchemy(app)
 
 # create Model for our Blog Post - designing the db Model here
 class BlogPost(db.Model):
+    __tablename__ = 'blogpost'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
