@@ -13,4 +13,8 @@ This CRUD application is a starter project that I am currently working on that w
 
 ## Implementation
 
-This project is implemented using Flask, Python 3.8, Bootstrap, HTML and SQLALchemy.
+This project is implemented using Flask, Python 3.8, Bootstrap, HTML and SQLALchemy.  
+
+## Deployment  
+GitHub - https://github.com/Gail-Deadwyler/Blog_Project.git 
+Heroku - https://gd-blogger.herokuapp.com/
